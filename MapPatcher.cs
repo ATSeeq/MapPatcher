@@ -57,8 +57,7 @@ class MapPatcher
                 continue;
 
             var sourceFileName = line.Split('(')[1].Split(')')[0];
-            var mapSeparator = '/';
-            if (sourceFileName.Contains(mapSeparator))
+            if (sourceFileName.Contains(Path.DirectorySeparatorChar))
             {
                 Console.WriteLine($"Warning: Source file already has full path: {sourceFileName}");
                 continue;
@@ -71,8 +70,7 @@ class MapPatcher
                 continue;
             }
 
-            var correctedSrcFilePath = sourceFilePath.Replace(Path.DirectorySeparatorChar, mapSeparator);
-            var patchedLine = line.Replace(sourceFileName, correctedSrcFilePath);
+            var patchedLine = line.Replace(sourceFileName, sourceFilePath);
             patchedMapFileLines[i] = patchedLine;
         }
 
